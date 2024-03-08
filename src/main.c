@@ -325,16 +325,16 @@ static int cmd_list(char *path)
 		do {
 			r = mcio_mcDread(fd, &dirent);
 			if ((r)) { /* && (strcmp(dirent.name, ".")) && (strcmp(dirent.name, ".."))) { */
-				printf("%-32s| %s | ", dirent.name, (dirent.stat.mode & sceMcFileAttrSubdir) ? "<dir> " : "<file>");
-				printf("%8d | ", dirent.stat.size);
-				printf("%c%c%c%c%c%c%c | ", (dirent.stat.mode & sceMcFileAttrReadable) ? 'r' : '-', 
+				printf("\"%s\" / %s / ", dirent.name, (dirent.stat.mode & sceMcFileAttrSubdir) ? "<dir> " : "<file>");
+				printf("%8d / ", dirent.stat.size);
+				printf("%c%c%c%c%c%c%c / ", (dirent.stat.mode & sceMcFileAttrReadable) ? 'r' : '-', 
 					(dirent.stat.mode & sceMcFileAttrWriteable) ? 'w' : '-',
 					(dirent.stat.mode & sceMcFileAttrExecutable) ? 'x' : '-',
 					(dirent.stat.mode & sceMcFileAttrDupProhibit) ? 'p' : '-',
 					(dirent.stat.mode & sceMcFileAttrHidden) ? 'H' : '-',
 					(dirent.stat.mode & sceMcFileAttrPDAExec) ? 'S' : '-',
 					(dirent.stat.mode & sceMcFileAttrPS1) ? '1' : '-');
-				printf("%02d/%02d/%04d-", dirent.stat.mtime.Month, dirent.stat.mtime.Day, dirent.stat.mtime.Year);
+				printf("%04d/%02d/%02d-", dirent.stat.mtime.Year, dirent.stat.mtime.Month, dirent.stat.mtime.Day);
 				printf("%02d:%02d:%02d", dirent.stat.mtime.Hour, dirent.stat.mtime.Min, dirent.stat.mtime.Sec);
 				printf("\n");
 			}
